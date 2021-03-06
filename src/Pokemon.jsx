@@ -23,20 +23,25 @@ const Pokemon = (props) => {
   }, [pokemonId]);
 
   const generatePokemonJSX = (pokemon) => {
-    const { name, id, species, height, weight, types, sprites } = pokemon;
+    const { name, id, species, height, weight, types, sprites, stats } = pokemon;
     const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
     const { front_default } = sprites;
     return (
       <>
-        <Typography variant="h1">
-          {`${id}.`} {toFirstCharUppercase(name)}
+      
+        {/* Pkmn#. Name | Icon */}
+        <Typography variant="h2">
+          {`${id}.`} 
+          {toFirstCharUppercase(name)}
           <img src={front_default} />
         </Typography>
+        {/* Image */}
         <img style={{ width: "300px", height: "300px" }} src={fullImageUrl} />
+        
         <Typography variant="h3">Pokemon Info</Typography>
         <Typography>
           {"Species: "}
-          <Link href={species.url}>{toFirstCharUppercase(species.name)} </Link>
+          <Typography >{toFirstCharUppercase(species.name)} </Typography>
         </Typography>
         <Typography>Height: {height} </Typography>
         <Typography>Weight: {weight} </Typography>
@@ -45,6 +50,12 @@ const Pokemon = (props) => {
           const { type } = typeInfo;
           const { name } = type;
           return <Typography key={toFirstCharUppercase(name)}> {`${toFirstCharUppercase(name)}`}</Typography>;
+        })}
+
+          {stats.map((statInfo) => {
+          const { stat } = statInfo;
+          const { hp } = statInfo.base_stat;
+          return <Typography key={(stat.base_stat)}> {`${(hp)}`}</Typography>;
         })}
       </>
     );
