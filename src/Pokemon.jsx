@@ -36,15 +36,15 @@ const Pokemon = (props) => {
         <Typography variant="h3">Pokemon Info</Typography>
         <Typography>
           {"Species: "}
-          <Link href={species.url}>{species.name} </Link>
+          <Link href={species.url}>{toFirstCharUppercase(species.name)} </Link>
         </Typography>
         <Typography>Height: {height} </Typography>
         <Typography>Weight: {weight} </Typography>
-        <Typography variant="h6"> Types:</Typography>
+        <Typography variant="h6"> Type(s):</Typography>
         {types.map((typeInfo) => {
           const { type } = typeInfo;
           const { name } = type;
-          return <Typography key={name}> {`${name}`}</Typography>;
+          return <Typography key={toFirstCharUppercase(name)}> {`${toFirstCharUppercase(name)}`}</Typography>;
         })}
       </>
     );
